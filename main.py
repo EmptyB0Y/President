@@ -59,6 +59,9 @@ for pl in players:
     else:
         break
 
-print(first_hand.getName())
-#while (playing):
+print(first_hand.getName() + " has the upper hand !")
+startIndex = players.index(first_hand)
 
+hand = list()
+while (playing):
+    hand[players[startIndex]] = input("Your choice "+players[startIndex].getName()+ " : ")
