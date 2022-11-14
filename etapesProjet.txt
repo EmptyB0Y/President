@@ -1,0 +1,69 @@
+1 - Creation des joueurs
+	|_ il doit avoir une possibilité de 3 à 6 joueur 
+
+Une fois le nombre de joueur selectionner 
+2 - distribution des 52 de cartes sur tous le nombres de joueur indiquer auparavant
+
+Une fois les cartes distribuer 
+3 - Le joueur possédant la dame de coeur commence
+
+Test de fonctionnaliter,
+4 - Jeu tour par tour,Tant que quelqu'un peut et veut jouer, le tour continue
+	|_ Faire un tour complet, que chaque joueur puisse jouer 
+	|
+	|_ Possibilité de passer le tour, joueur 1 joue, joueur deux passe c'est au 
+	|	tour du joueur 3 
+	|
+	|_ Test de condition si lejoueur pose 1 carte le joueur suivant pose 1 carte 
+	|	la condition ce vaut pour [2, 3 et 4] si le premier joueur pose 3 carte 
+	|	le deuxieme joueur est obligé de poser 3 cartes ou de passer son tour
+	|!!! Attention condition 1 carte pour 1 carte, 2 carte pr 2 carte, le joueur 1
+	|	pose 1 carte le joueur 2 ne peut pas poser 2, 3 ou 4 cartes !
+	| 
+	|_ La carte doit être tjrs egale ou suppérieur à celle poser 
+	|
+	|_ Si tour compler sans aucun notre joueur puisse jouer, suppression de
+	|	cartes, et le joueur relance  le jeux, ex :
+	|	joueur 2 joue, joueur 3,4,1 ne joue pas, la pile est supprimer
+	|	et le joueur 2 relance la partie.
+	|_ Systeme de classement :  premier, deuxieme etc etc
+	|
+	|_ Premier à ne plus avoir de carte devient [ Président ], et la partie n'est pas fini
+	|	Il passe au statue président et n'a plus d'impact sur la partie.
+	|	Les joueur reste joue jusqu'a qu'il reste 1 personne 
+	|		|_ Le dernier passe au statue [ Troufion ]
+	|	
+	|_ Relancer la partie avec la sauvegarde du dernier joueur 
+	|	|_ Le [ Troufion ] commence la nvl partie 
+	|	|_ [ Troufion ] Donne ça plus forte carte
+	|	|_ [ Président ] Donne ça plus faible carte
+	|
+	|_ Conception IA simple, ex je joue 4, tu joues une carte =< à la carte poser
+	|
+	|-> Suite Bonus 
+	|_ 5 joueur et +, Ajou de la condition victoire/défaiet
+	|	|_ [ Troufion ] donne ces 2 plus fortes cartes 
+	|	|_ [ Vice Troufion ] donne ça plus forte carte
+	|	|_ [ President ] donne ces 2 plus faibles cartes
+	|	|_ [ Vice President ] donne ça plus faible carte
+	|
+	|_ Interface graphique
+	|_ Amélioration IA
+
+BAREME :
+
+/1 Présence d'un fichierrequirements.txt
+/1 Pertinence du fichierReadme.md
+
+/2 Gestion de GIT
+/2 Docrings
+
+/2 Méthodes de nommage/classes/variables
+/2 Un joueur face à 3 IA
+
+/2 Génération des cartes
+/2 Validation des tests unitaires
+
+/2 Présentation graphique
+/1 Présentation graphique aboutie
+/3 Fonctionnalités avancées de jeu du président
