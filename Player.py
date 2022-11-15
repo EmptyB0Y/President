@@ -33,3 +33,16 @@ class Player:
 
     def getDeck(self):
         return self._deck
+
+    def getDeckOrganized(self) -> dict:
+        organized = {}
+        for i in range(1,14):
+            create = True
+            for j in self._deck:
+                if(j.getNumber() == i):
+                    if(create):
+                        organized[i] = list()
+                        create = False
+                    organized[i].append(j.__str__())
+        return organized
+

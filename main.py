@@ -62,6 +62,48 @@ for pl in players:
 print(first_hand.getName() + " has the upper hand !")
 startIndex = players.index(first_hand)
 
-hand = list()
+hand = {}
 while (playing):
-    hand[players[startIndex]] = input("Your choice "+players[startIndex].getName()+ " : ")
+    print("Your hand : "+str(players[startIndex].getDeckOrganized()))
+    hand[players[startIndex]] = input("Your choice, "+players[startIndex].getName()+ " : ").split("-")
+    index = startIndex
+    for i in range(0,player_nbr-1):
+        if(index < player_nbr-1):
+            index += 1
+        else:
+            index = 0
+        #CHECK IF PLAYER CAN PLAY
+        #FIXME
+        canPlay = False
+        for j in players[index].getDeckOrganized().keys():
+            print(j)
+            print(hand[players[startIndex]][0])
+            if(j >= int(hand[players[startIndex]][0])):
+                if(len(players[index].getDeckOrganized()[j]) >= len(players[startIndex].getDeckOrganized()[j])):
+                    canPlay = True
+
+        if (canPlay):
+            print("test")
+            print("Your hand : "+str(players[index].getDeckOrganized()))
+            hand[players[index]] = input("Your choice, "+players[index].getName()+ " : ").split("-")
+        else:
+            print(str(players[index].getName()) + " can't play !")
+
+    for i in range(0,len(hand)):
+        cardsIndex = int(hand[players[i]][0])
+        cardNbr = int(hand[players[i]][1])
+        if(cardsIndex != "*" and cardNbr != "*"):
+            if(not players[i].getDeckOrganized().__contains__(cardsIndex)):
+                #TODO ERROR
+                pass
+            elif(cardNbr > len(players[i].getDeckOrganized()[cardsIndex]) or cardNbr > 4):
+                #TODO ERROR
+                pass
+            elif(cardNbr != hand[players[startIndex]][1]):
+                #TODO ERROR
+                pass
+            else:
+                cards = players[i].getDeckOrganized()[cardsIndex]
+                for j in range(0,cardNbr):
+                    print(players[i].getName() + " played " + str(cards[j]))
+
