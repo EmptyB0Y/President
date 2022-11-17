@@ -18,15 +18,9 @@ class Player:
     def addCard(self,crd):
         self._deck.append(crd)
     
-    def drawCard(self,crd_lst):
-        draw = list()
+    def drawCards(self,crd_lst):
         for i in crd_lst:
-            try:
-                self._deck.remove(self._deck.index(i))
-                draw.append(self._deck.index(i))
-            except(ValueError):
-                print(ValueError)
-        return draw
+            self._deck.remove(i)
 
     def getName(self):
         return self._name
@@ -46,3 +40,5 @@ class Player:
                     organized[i].append(j.__str__())
         return organized
 
+    def exchangeWithPresident(pl):
+        pass

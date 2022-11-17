@@ -17,14 +17,18 @@ class Card:
                 card_str = "♧"
         elif self._color == "pique":
                 card_str = "♤"
-        if self._number == 11:
+        if self._number == 9:
             card_str += "J"
-        elif self._number == 12:
+        elif self._number == 10:
             card_str += "Q"
-        elif self._number == 13:
+        elif self._number == 11:
             card_str += "K"
+        elif self._number == 12:
+            card_str += "A"
+        elif self._number == 13:
+            card_str += "2"
         else:
-            card_str += str(self._number)
+            card_str += str(self._number+2)
         
         return card_str
              

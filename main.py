@@ -49,25 +49,41 @@ for pl in players:
     print(str(len(pl.getDeck())))
 
 first_hand = None
-
-for pl in players:
-    if(first_hand is None):
-        for i in pl.getDeck():
-            if(i.getColor() == "coeur" and i.getNumber() == 12):
-                first_hand = pl
-                break
-    else:
-        break
-
-print(first_hand.getName() + " has the upper hand !")
-startIndex = players.index(first_hand)
-
 hand = {}
+playAgain = True
+index = 0
+
 while (playing):
+
+    if(playAgain):
+        playAgain = False
+        for pl in players:
+            if(first_hand is None):
+                for i in pl.getDeck():
+                    if(i.getColor() == "coeur" and i.getNumber() == 10):
+                        first_hand = pl
+                        break
+            elif(pl.getRole() == "president"):
+                first_hand = pl
+                for pl2 in players:
+                    if(pl2.getRole() == "asswipe"):
+                        pl2.exchangeWithPresident(pl)
+                
+
+        print(first_hand.getName() + " has the upper hand !")
+        startIndex = players.index(first_hand)
+
+        hand = {}
+
     print("Your hand : "+str(players[startIndex].getDeckOrganized()))
     hand[players[startIndex]] = input("Your choice, "+players[startIndex].getName()+ " : ").split("-")
     index = startIndex
+
     count = 1
+    cut = False
+    if(int(hand[players[startIndex]][0]) == 13):
+        cut = True
+
     while(count < player_nbr):
         if(index < player_nbr-1):
             index += 1
@@ -76,25 +92,28 @@ while (playing):
         #CHECK IF PLAYER CAN PLAY
         canPlay = False
         for j in players[index].getDeckOrganized().keys():
-            if(int(j) >= int(hand[players[startIndex]][0])):
-                if(len(players[index].getDeckOrganized()[j]) >= len(hand[players[startIndex]][1])):
+            #check if card is present
+            if(j >= int(hand[players[startIndex]][0])):
+                #check if card is in enough amount
+                if(len(players[index].getDeckOrganized()[j]) >= len(hand[players[startIndex]][1]) and not cut):
                     canPlay = True
 
         if (canPlay):
             print("Your hand : "+str(players[index].getDeckOrganized()))
             hand[players[index]] = input("Your choice, "+players[index].getName()+ " : ").split("-")
+            if(int(hand[players[index]][0]) == 13):
+                print("cut")
+                cut = True
         else:
             print(str(players[index].getName()) + " can't play !")
-            hand[players[index]] = ['*','*']
+            hand[players[index]] = ['0','0']
         count += 1
 
-    print("end of loop")
-    print(str(len(hand)))
+    #Check drawn hand
     for i in range(0,len(hand)):
-        print("test")
-        cardsIndex = int(hand[players[i]][0])
-        cardNbr = int(hand[players[i]][1])
-        if(cardsIndex != "*" and cardNbr != "*"):
+        if(hand[players[i]][0] != "0" and hand[players[i]][1] != "0"):
+            cardsIndex = int(hand[players[i]][0])
+            cardNbr = int(hand[players[i]][1])
             if(not players[i].getDeckOrganized().__contains__(cardsIndex)):
                 print("error 1")
                 #TODO ERROR
@@ -109,6 +128,36 @@ while (playing):
                 #pass
             else:
                 cards = players[i].getDeckOrganized()[cardsIndex]
+                drew = list()
                 for j in range(0,cardNbr):
+                    for x in players[i].getDeck():
+                        if(x.__str__() == cards[j]):
+                            drew.append(x)
                     print(players[i].getName() + " played " + str(cards[j]))
+                players[i].drawCards(drew)
+                startIndex = i
+        else:
+            print(players[i].getName() + " passed")
+
+    #Check if a player has won
+    biggestDeck = players[0]
+    for pl in players:
+        if(len(pl.getDeck()) == 0):
+            pl.setRole("president")
+            print(pl.getName() + " is the president")
+            playing = False
+        elif(len(pl.getDeck()) > len(biggestDeck.getDeck())):
+            biggestDeck = pl
+
+    if(not playing):
+        biggestDeck.setRole("asswipe")
+        print(pl.getName() + " is the asswipe")
+
+        choice = None
+        while(choice != 'y' or choice != 'n'):
+            choice = input("Play again ? : Y/n")
+
+        if(choice == 'y'):
+            playAgain = True
+            playing = True
 
