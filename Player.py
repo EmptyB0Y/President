@@ -1,12 +1,15 @@
 import Card
+import random
 
 class Player:
 
   
     _role = ""
 
-    def __init__(self,name) -> None:
-        self._name = name  
+    def __init__(self,name='') -> None:
+        self._name = name
+        if(self._name == ''):
+            self._name = str(random.randbytes(7))
         self._deck = list()
     
     def getRole(self):

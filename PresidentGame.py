@@ -9,8 +9,11 @@ class PresidentGame():
     player_nbr = 0
     main_deck = [] #Deck.Deck()
 
-    def __init__(self) -> None:
-        pass
+    def __init__(self,playerList=[]) -> None:
+        if(len(playerList) >= 3 and len(playerList) <= 6):
+            for i in playerList:
+                self.player_nbr += 1
+                self.players.append(Player.Player(i))
 
     def makeDeck(self):
         while (self.player_nbr < 3 or self.player_nbr > 6):
@@ -32,10 +35,11 @@ class PresidentGame():
 
         random.shuffle(self.main_deck)
 
-        for i in range(1,self.player_nbr+1):
-            name = input("Name for player " + str(i) + " : ")
-            pl = Player.Player(name)
-            self.players.append(pl)
+        if(self.players == []): 
+            for i in range(1,self.player_nbr+1):
+                name = input("Name for player " + str(i) + " : ")
+                pl = Player.Player(name)
+                self.players.append(pl)
 
         plcount = self.player_nbr-1
 
@@ -44,9 +48,7 @@ class PresidentGame():
                 plcount = self.player_nbr-1
 
             card = self.main_deck.pop(0)
-            self.players[plcount].addCard(card)
-            
-            #print("added "+str(card)+" to "+players[plcount].getName()+"'s deck")
+            self.players[plcount].addCard(card)            
             plcount -= 1
 
         self.main_deck.clear()
