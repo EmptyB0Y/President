@@ -1,11 +1,12 @@
 import Card
 import Player
 import random
+import Deck
 
 players = list()
 playing = True
 player_nbr = 0
-main_deck = []
+main_deck = [] #Deck.Deck()
 
 while (player_nbr < 3 or player_nbr > 6):
     player_nbr = int(input("Player amount (between 3 and 6) : "))
@@ -118,7 +119,7 @@ while (playing):
                 print("error 1")
                 #TODO ERROR
                 #pass
-            elif(cardNbr > len(players[i].getDeckOrganized()[cardsIndex]) or cardNbr > 4):
+            elif(cardNbr > len(players[i].getDeckOrganized()[cardsIndex]) or cardNbr > 4 or cardNbr < len(players[i].getDeckOrganized()[cardsIndex])):
                 print("error 2")
                 #TODO ERROR
                 #pass
