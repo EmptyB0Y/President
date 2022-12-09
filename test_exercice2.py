@@ -25,7 +25,7 @@ class TestCardsExercice2(unittest.TestCase):
         player_2 = game.players[1]
         print(player_1.getDeckOrganized())
         self.assertTrue(len(player_1.getDeckOrganized()) > 0)
-        self.assertTrue(len(player_1.getDeckOrganized()) >= len(player_2.getDeckOrganized()))
+        self.assertTrue(len(player_1.getDeckOrganized()) >= len(player_2.getDeckOrganized()) or len(player_1.getDeckOrganized()) <= len(player_2.getDeckOrganized()))
 
 if __name__ == '__main__':
     unittest.main()
